@@ -1,0 +1,11 @@
+# Ignorer les dossiers de données (BookStack & MySQL)
+bs-data/
+bs-db/
+
+# Ignorer les dossiers DokuWiki qui polluent
+dw_config/
+
+# Ignorer les fichiers système et secrets
+.env
+.DS_Store
+Thumbs.db
