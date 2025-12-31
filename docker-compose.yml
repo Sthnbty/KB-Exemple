@@ -1,25 +1,14 @@
 services:
-  #proxy:#
-    #image: nginxproxy/acme-companion#
-    #container_name: nginx_proxy#
-    #restart: unless-stopped#
-    #ports:#
-     # - "80:80"#
-     # - "443:443"#
-     #volumes:#
-      #- ./nginx/certs:/etc/nginx/certs:ro#
-     # - ./nginx/vhost.d:/etc/nginx/vhost.d
-     # - ./nginx/html:/usr/share/nginx/html
-      #- /var/run/docker.sock:/tmp/docker.sock:ro
-
   bookstack:
     image: lscr.io/linuxserver/bookstack:25.11.6
     container_name: bookstack
+    env_file:
+      - .env
     environment:
       - PUID=1000
       - PGID=1000
-      - APP_URL=http://localhost:6875
-      - APP_KEY=${APP_KEY}      
+      - APP_URL=${APP_URL}
+      - APP_KEY=${APP_KEY}
       - DB_HOST=${DB_HOST}
       - DB_USER=${DB_USERNAME}
       - DB_PASS=${DB_PASSWORD}
@@ -35,11 +24,13 @@ services:
   bookstack_db:
     image: mysql:5.7
     container_name: bookstack_db
+    env_file:
+      - .env
     environment:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
       - MYSQL_DATABASE=${MYSQL_DATABASE}
-      - MYSQL_USER={MYSQL_USER}
-      - MYSQL_PASSWORD={MYSQL_PASSWORD}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     volumes:
       - ./bs-db:/var/lib/mysql
     restart: unless-stopped
