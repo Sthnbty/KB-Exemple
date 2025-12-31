@@ -18,7 +18,7 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - APP_URL=https://localhost:6875
+      - APP_URL=http://localhost:6875
       - APP_KEY=${APP_KEY}      
       - DB_HOST=${DB_HOST}
       - DB_USER=${DB_USERNAME}
